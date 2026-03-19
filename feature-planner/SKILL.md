@@ -33,8 +33,37 @@ Use `ask_user_input_v0` to confirm:
 
 This choice affects the template flow:
 - **New project**: Include project-level sections (project name, description, target audience, branding/identity, ALL initial pages, deployment target)
-- **New feature**: Skip project-level context, focus on the feature pages, data, and interactions. Ask which project this is for.
-- **Redesign**: Fetch existing app context if available, focus on aesthetic direction and component redesign while preserving backend.
+- **New feature**: Skip project-level context, focus on the feature pages, data, and interactions. Pull existing project context from Notion (see Step 1.5).
+- **Redesign**: Fetch existing app context from Notion, focus on aesthetic direction and component redesign while preserving backend.
+
+### Step 0.5: Pull Existing Project Context (Features & Redesigns only)
+
+When the user is adding to an existing project:
+
+1. **Ask which project** — or infer from conversation context
+2. **Search Notion** for the project:
+   ```
+   Notion MCP: notion-search
+   query: "[project name]"
+   query_type: "internal"
+   page_size: 5
+   ```
+3. **Fetch the project page** to understand what already exists:
+   ```
+   Notion MCP: notion-fetch
+   id: [page_id from search results]
+   ```
+4. **Extract existing context:**
+   - Tech stack (Rails, React, Inertia, etc.)
+   - Existing pages/routes and their purpose
+   - Data models and relationships
+   - Design system / aesthetic direction already in use
+   - Layouts and component patterns
+   - Any existing feature specs linked from the project page
+
+5. **Present a summary** to the user: "Here's what I found about [Project]. Based on this, the new feature will need to integrate with [existing models/pages]. Does this look right?"
+
+This context informs everything downstream — the data shape section will reference existing models, the pages will fit into existing route patterns, and components will follow established conventions.
 
 ### Step 1: Fetch the Template
 
