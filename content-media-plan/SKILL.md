@@ -476,6 +476,27 @@ preview_screenshot → capture a screenshot to confirm it rendered correctly
 
 Tell the user the full local file path. If Preview MCP is not available, instruct them to open the file manually: `open content-media-plan.html`
 
+### Deployment
+
+Include a `wrangler.jsonc` in the project directory so the presentation can be deployed instantly:
+
+```jsonc
+{
+  "name": "<brand-name>-content-plan",
+  "compatibility_date": "2025-04-01",
+  "assets": {
+    "directory": "./"
+  }
+}
+```
+
+Deploy with:
+```bash
+cd content-media-plan && wrangler deploy
+```
+
+This deploys the HTML + images as a static site to Cloudflare, giving the user a shareable URL for client presentations or team reviews.
+
 ---
 
 ## Step 7: Storage
@@ -570,6 +591,7 @@ No Google Drive MCP is available for direct upload. Instead, organize the files 
 ```
 content-media-plan/
 ├── content-media-plan.html       ← open in browser to view
+├── wrangler.jsonc                ← deploy with: wrangler deploy
 ├── images/
 │   ├── example-feed-post.jpg
 │   ├── example-carousel-cover.jpg

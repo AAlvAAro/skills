@@ -352,16 +352,26 @@ Present the user with options based on their situation:
 
 **Option A: Single HTML File** (recommended for beginners)
 - Zero dependencies, open in any browser
-- Drop into any hosting (GitHub Pages, Netlify drop, shared hosting)
 - Best for: clients who need it NOW, non-technical users, quick prototypes
 - Inline CSS + JS, Google Fonts via CDN
 - Images referenced as local files in same directory
+- Deploy with Wrangler — include `wrangler.jsonc` in the project folder:
+  ```jsonc
+  {
+    "name": "<project-name>",
+    "compatibility_date": "2025-04-01",
+    "assets": {
+      "directory": "./"
+    }
+  }
+  ```
+  Then: `cd <project-folder> && wrangler deploy`
 
 **Option B: Vite + React SPA** (recommended for developers)
-- `npm run build` → deploy to Vercel/Netlify/Amplify
+- `npm run build` → deploy with `wrangler deploy`
 - Component-based, easy to modify
 - Best for: developers, projects that will grow, custom domains
-- Follow the standalone React guidelines from the `frontend-design` skill
+- Follow the standalone React guidelines from the `frontend-design` skill (includes `wrangler.jsonc` setup)
 
 **Option C: Rails + Inertia Page** (recommended for SaaS integration)
 - Generates directly into a Rails project structure
@@ -373,13 +383,23 @@ Present the user with options based on their situation:
 **Option D: Deployable HTML + Asset Bundle** (recommended for client handoff)
 - Organized folder: `index.html` + `css/` + `images/` + `js/`
 - README with deployment instructions
-- Easy to zip and send to a client or upload to shared hosting
 - Best for: freelancers, agency work, client deliverables
+- Include `wrangler.jsonc` in the folder root:
+  ```jsonc
+  {
+    "name": "<project-name>",
+    "compatibility_date": "2025-04-01",
+    "assets": {
+      "directory": "./"
+    }
+  }
+  ```
+  Deploy: `cd <project-folder> && wrangler deploy`
 
 **Auto-selection logic** (propose this, let user override):
 - Inside a Rails+Inertia project → Option C
 - User mentioned "client" or "freelance" → Option D
-- User is technical / mentioned Vercel/Netlify → Option B
+- User is technical / mentioned Vercel/Netlify/Cloudflare → Option B
 - Default / beginner / "just make it work" → Option A
 
 ### Design Execution
