@@ -30,6 +30,22 @@ Interactive feature planning assistant that goes from idea to implementation-rea
 npx skills add AAlvAAro/skills@feature-planner
 ```
 
+### content-media-plan
+
+Research-driven content calendar and media plan generator:
+
+- **Document-first** — reads a brief or strategy doc directly if you have one, or guides you through 3 rounds of focused questions
+- **Reference research** — analyzes competitor/inspiration social accounts (Instagram, TikTok, Facebook, YouTube) to extract real content patterns
+- **Strategy definition** — proposes content pillars, platform mix, and posting frequency based on your goals and capacity
+- **Flexible calendar** — 1, 2, or 4-week day-by-day schedule with platform, format, pillar, and topic for each post
+- **Format examples** — fully written example copy + AI-generated sample images for every format type (Feed Post, Carousel, Reels, Stories, Tweet, FB Post, Blog, Newsletter)
+- **Visual HTML output** — color-coded calendar grid + format gallery, opened live in the browser
+- **Flexible storage** — save to Notion and/or export a local bundle for Google Drive
+
+```bash
+npx skills add AAlvAAro/skills@content-media-plan
+```
+
 ### landing-page
 
 Research-driven landing page generator that builds pages from real data:
@@ -51,5 +67,6 @@ npx skills add AAlvAAro/skills@landing-page
 ```
 /feature-planner  →  plan the feature (idea → Notion spec)
 /frontend-design  →  generate the UI (spec → working code)
-/landing-page     →  research + generate a complete landing page from social/web data
+/content-media-plan  →  research + generate a full content calendar with format examples and visual deliverable
+/landing-page        →  research + generate a complete landing page from social/web data
 ```
