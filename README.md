@@ -62,11 +62,27 @@ Research-driven landing page generator that builds pages from real data:
 npx skills add AAlvAAro/skills@landing-page
 ```
 
+### presentation
+
+Research-driven presentation generator that creates shareable HTML slide decks:
+
+- **Flexible input** — starts from a document, URL, file, pasted text, image, or guided questions
+- **Multi-source research** — social media, news, finance, trends, ads, YouTube, app stores, Google Maps reviews, web scraping via Social Toolkit and SearchAPI MCPs
+- **Presentation types** — pitch deck, sales/investment, marketing, business model canvas, product launch, portfolio, educational, market analysis
+- **Visual styles** — minimalist executive, bold & dynamic, editorial, data-driven, creative/storytelling
+- **Interactive HTML** — keyboard navigation (arrows, fullscreen, overview grid), touch/swipe, progress bar, speaker notes, direct slide linking via URL hash
+- **Instant sharing** — deploys to Cloudflare Workers via wrangler for a shareable URL
+
+```bash
+npx skills add AAlvAAro/skills@presentation
+```
+
 ## Workflow
 
 ```
-/feature-planner  →  plan the feature (idea → Notion spec)
-/frontend-design  →  generate the UI (spec → working code)
+/feature-planner     →  plan the feature (idea → Notion spec)
+/frontend-design     →  generate the UI (spec → working code)
 /content-media-plan  →  research + generate a full content calendar with format examples and visual deliverable
 /landing-page        →  research + generate a complete landing page from social/web data
+/presentation        →  research + generate an interactive HTML slide deck deployable via URL
 ```

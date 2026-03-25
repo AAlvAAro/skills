@@ -1,0 +1,10 @@
+# Temporary output files
+tmp/
+**DS_Store
+TODO.md
+
+# Installed skill copies (created by npx skills add)
+.agents/
+.claude/skills/
+.kiro/
+.windsurf/
