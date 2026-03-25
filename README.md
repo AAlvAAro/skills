@@ -1,6 +1,16 @@
-# Skills
+<p align="center">
+  <img src="https://cdn.simpleicons.org/anthropic/191919" width="48" height="48" alt="Anthropic" />
+</p>
 
-Custom Claude Code skills.
+<h1 align="center">Skills</h1>
+
+<p align="center">
+  A personal collection of Claude Code skills I use daily — spanning product development,<br/>
+  marketing, content creation, coffee science, and career tools.<br/>
+  Built for real workflows, not demos.
+</p>
+
+---
 
 ## Available Skills
 
@@ -77,6 +87,36 @@ Research-driven presentation generator that creates shareable HTML slide decks:
 npx skills add AAlvAAro/skills@presentation
 ```
 
+### cv-generator
+
+Professional resume and CV builder that acts as an expert recruiter, not just a template filler:
+
+- **Multi-source input** — reads from PDF, DOCX, TXT, Markdown, HTML, URLs, LinkedIn, or Notion pages
+- **Recruiter-grade advice** — researches the target industry, suggests improvements, and optimizes content strategy
+- **AI headshot** — generates a professional portrait from a reference photo
+- **Polished output** — single-page HTML resume with PDF download, deployed instantly via Cloudflare Workers
+- **Interview mode** — if no source provided, gathers information through guided questions
+
+```bash
+npx skills add AAlvAAro/skills@cv-generator
+```
+
+### catador-pro
+
+AI-powered coffee cupping assistant by [Catador Pro](https://catador.pro). Expert in specialty coffee sensory analysis:
+
+- **Protocol support** — SCA Arabica, SCA Robusta, Cup of Excellence, and CVA cupping protocols
+- **Document analysis** — reads cupping forms and score sheets (PDF, images, text), validates and scores them
+- **Flavor profiling** — identifies flavors using the SCA Flavor Wheel with origin-aware context
+- **Visual reports** — generates HTML reports with spider charts, comparisons, and detailed breakdowns
+- **Bilingual** — responds in Spanish or English, switching seamlessly
+
+```bash
+npx skills add AAlvAAro/skills@catador-pro
+```
+
+---
+
 ## Workflow
 
 ```
@@ -85,4 +125,6 @@ npx skills add AAlvAAro/skills@presentation
 /content-media-plan  →  research + generate a full content calendar with format examples and visual deliverable
 /landing-page        →  research + generate a complete landing page from social/web data
 /presentation        →  research + generate an interactive HTML slide deck deployable via URL
+/cv-generator        →  build a professional web resume from any source material
+/catador-pro         →  analyze cupping sessions, score coffees, generate sensory reports
 ```
