@@ -298,25 +298,36 @@ Also propose 1-2 context-specific types based on the topic (e.g., if the topic i
 
 For multi-material: user must select at least 2 types. All selected materials will share the same visual style and design preferences for consistency.
 
-### 4B: Presentation Style
+### 4B: Presentation Style (2-3 Quick Questions)
 
-> "Pick a visual style for the slides:"
-
-| Style | Description |
-|-------|-------------|
-| **Minimalist Executive** | Clean layouts, generous whitespace, subtle fade transitions, muted palette, authoritative typography |
-| **Bold & Dynamic** | Strong saturated colors, large display typography, impactful slide transitions, high contrast |
-| **Editorial / Magazine** | Editorial grid layouts, pull quotes, sophisticated serif + sans-serif pairing, photography-forward |
-| **Data-Driven / Analytical** | Chart emphasis, structured grids, clear visual hierarchy, monospace accents, dashboard-inspired |
-| **Creative / Storytelling** | Narrative flow between slides, immersive full-bleed visuals, cinematic transitions, atmospheric |
-
-### 4C: Design Preferences
+Instead of showing a menu of predefined styles, ask 2-3 quick questions to understand the user's visual preferences, then derive the style from their answers. **Always use light backgrounds** — dark mode is hard to read in presentations and should never be used.
 
 Ask all in one message:
-- **Color preference**: brand hex codes, or a mood? (e.g., "corporate blue", "warm earth tones", "dark and bold") Default: derive from style choice.
-- **Typography mood**: modern sans-serif, classic serif, playful rounded, technical monospace? Default: derive from style choice.
-- **Dark mode or light mode?** Default: derive from style (Minimalist Executive = light, Bold & Dynamic = dark, Editorial = light, Data-Driven = dark, Creative = dark).
-- **Visual density**: spacious/breathable (fewer elements per slide) vs. content-rich/dense (more data per slide)? Default: derive from type.
+
+> "A few quick questions to nail the visual direction:"
+>
+> 1. **What's the vibe?** Corporate & clean, bold & energetic, elegant & editorial, data-heavy & analytical, or creative & immersive?
+> 2. **Color mood?** Any brand colors (hex codes)? Or a general feel — e.g., "warm earth tones", "corporate blue", "vibrant and modern", "monochrome"
+> 3. **Content density?** Spacious with lots of breathing room, or content-rich with more data per slide?
+
+**Deriving the style from answers:**
+
+| User vibe | Mapped style | Description |
+|-----------|-------------|-------------|
+| Corporate & clean | **Minimalist Executive** | Light backgrounds, generous whitespace, subtle fade transitions, muted palette, authoritative typography |
+| Bold & energetic | **Bold & Dynamic** | Light backgrounds with strong saturated accent colors, large display typography, impactful slide transitions, high contrast elements |
+| Elegant & editorial | **Editorial / Magazine** | Light cream/warm backgrounds, editorial grid layouts, pull quotes, sophisticated serif + sans-serif pairing, photography-forward |
+| Data-heavy & analytical | **Data-Driven / Analytical** | Light backgrounds, chart emphasis, structured grids, clear visual hierarchy, monospace accents, dashboard-inspired |
+| Creative & immersive | **Creative / Storytelling** | Light backgrounds with atmospheric accents, narrative flow between slides, cinematic transitions, full-bleed imagery with light overlays |
+
+**IMPORTANT — Light mode only:** All presentations must use light backgrounds (white, off-white, cream, light gray). Dark backgrounds are hard to read in presentation settings (projectors, screen sharing, printed handouts). Use dark/bold colors for text, accents, and decorative elements — never for the main slide background. This is non-negotiable regardless of user preference.
+
+### 4C: Design Finalization
+
+Based on the user's answers above, determine:
+- **Color palette**: derive from brand colors or mood — always with light backgrounds and dark text
+- **Typography mood**: derive from the vibe (corporate = modern sans-serif, editorial = serif + sans-serif, etc.)
+- **Visual density**: directly from their answer
 
 After all selections, confirm the complete direction:
 
@@ -594,7 +605,7 @@ professional [photography/illustration/abstract] style,
 no text overlay, no logos, clean and presentation-ready"
 ```
 
-**Download all generated images** to an `images/` directory alongside the HTML file. Tell the user: *"Generating presentation images — this may take a moment..."*
+**Download all generated images** to the `images/` directory inside the `/tmp/presentation-<topic-slug>/` project folder. Tell the user: *"Generating presentation images — this may take a moment..."*
 
 ---
 
@@ -606,9 +617,18 @@ Generate self-contained HTML files with all CSS and JS inline. The only external
 
 ### File Structure
 
+All presentation files are generated in a namespaced folder under `/tmp/` to keep the user's project directory clean and support multiple runs without collisions.
+
+**Directory convention:**
+```
+/tmp/presentation-<topic-slug>/
+```
+
+Where `<topic-slug>` is a kebab-case version of the topic (e.g., `/tmp/presentation-startup-pitch/`, `/tmp/presentation-q1-sales-report/`). If the skill is run multiple times for the same topic, append a counter: `/tmp/presentation-startup-pitch-2/`.
+
 **Single mode:**
 ```
-<output-dir>/
+/tmp/presentation-<topic-slug>/
   index.html          ← the slide deck
   images/
     hero-bg.jpg
@@ -620,7 +640,7 @@ Generate self-contained HTML files with all CSS and JS inline. The only external
 
 **Multi-material mode:**
 ```
-<project-dir>/
+/tmp/presentation-<topic-slug>/
   index.html              ← fancy brochure/book index linking to all materials
   images/
     index-hero.jpg         ← hero image for the index page
@@ -715,12 +735,12 @@ Never reuse the same font combination across different generations. Vary intenti
 
 ```css
 :root {
-  /* Theme — derived from design preferences */
-  --bg-primary: #[hex];
-  --bg-secondary: #[hex];
-  --text-primary: #[hex];
-  --text-secondary: #[hex];
-  --accent: #[hex];
+  /* Theme — derived from design preferences (ALWAYS light backgrounds) */
+  --bg-primary: #[light hex — white/off-white/cream];
+  --bg-secondary: #[light hex — light gray/warm white];
+  --text-primary: #[dark hex — near-black/dark gray];
+  --text-secondary: #[medium hex — gray];
+  --accent: #[hex — bold color for emphasis];
   --accent-secondary: #[hex];
 
   /* Typography */
@@ -859,20 +879,41 @@ Slides should work on:
 After generating the HTML file and saving images:
 
 ```bash
-open index.html
+open /tmp/presentation-<topic-slug>/index.html
 ```
 
-Tell the user the full local file path.
+Tell the user the full local file path (under `/tmp/`).
 
 ---
 
 ## Step 8: Deployment
 
+### 8A: Subdomain Selection
+
+Before deploying, ask the user what subdomain they'd like:
+
+> "What subdomain would you like for this presentation? (e.g., `my-pitch.workers.dev`). If you don't have a preference, I'll pick one for you."
+
+**If the user provides a subdomain:** use it as-is (kebab-case, lowercase).
+
+**If the user skips or says "whatever" / "you pick":** auto-generate one:
+1. Pick a single descriptive word from the presentation topic (e.g., "pitch", "sales", "finanzas", "growth", "launch")
+2. Append a random 6-character alphanumeric string to avoid collisions
+3. Result: `pitch-a3x9k2`, `growth-m7b2p1`, `finanzas-q8r4t6`
+
+```bash
+# Generate random suffix
+SUFFIX=$(LC_ALL=C tr -dc 'a-z0-9' < /dev/urandom | head -c 6)
+SUBDOMAIN="<word>-${SUFFIX}"
+```
+
+### 8B: Deploy to Cloudflare Workers
+
 Include a `wrangler.jsonc` in the output directory (root level for both single and multi-material):
 
 ```jsonc
 {
-  "name": "<topic-slug>-presentation",
+  "name": "<subdomain>",
   "compatibility_date": "2025-04-01",
   "assets": {
     "directory": "./"
@@ -880,9 +921,9 @@ Include a `wrangler.jsonc` in the output directory (root level for both single a
 }
 ```
 
-Deploy with:
+Deploy from the `/tmp/` project directory:
 ```bash
-cd <output-dir> && wrangler deploy
+cd /tmp/presentation-<topic-slug> && wrangler deploy
 ```
 
 This deploys the entire directory tree as a static site to Cloudflare Workers.
@@ -890,10 +931,10 @@ This deploys the entire directory tree as a static site to Cloudflare Workers.
 **Single mode** — one URL for the presentation.
 
 **Multi-material mode** — one URL with paths for each material:
-- `https://<project>.workers.dev/` → index page (brochure)
-- `https://<project>.workers.dev/pitch-deck/` → pitch deck
-- `https://<project>.workers.dev/plan-de-negocios/` → business plan
-- `https://<project>.workers.dev/reporte-financiero/` → financial report
+- `https://<subdomain>.workers.dev/` → index page (brochure)
+- `https://<subdomain>.workers.dev/pitch-deck/` → pitch deck
+- `https://<subdomain>.workers.dev/plan-de-negocios/` → business plan
+- `https://<subdomain>.workers.dev/reporte-financiero/` → financial report
 
 Tell the user the deployed URL(s) once complete.
 
@@ -982,9 +1023,9 @@ Wrap up with a clean summary.
 
 **What was created:**
 - [N]-slide [type] presentation in [style] style
-- Interactive HTML slide deck: `[local file path]`
+- Interactive HTML slide deck: `/tmp/presentation-<topic-slug>/index.html`
 - [N] AI-generated visuals
-- Deployed URL: `[Cloudflare Workers URL]`
+- Deployed URL: `https://<subdomain>.workers.dev/`
 - [Notion page URL — if saved to Notion]
 
 **Multi-material mode:**
@@ -997,7 +1038,7 @@ Wrap up with a clean summary.
   - [... list all materials]
 - Index page (brochure): `[URL]/`
 - [N] total AI-generated visuals
-- Local project directory: `[local path]`
+- Local project directory: `/tmp/presentation-<topic-slug>/`
 - [Notion parent page URL — if saved to Notion]
 
 **Navigation guide (applies to each slide deck):**
