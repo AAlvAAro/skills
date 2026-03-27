@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{lang_code}}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invoice {{invoice_number}}</title>
+  <title>{{l_invoice}} {{invoice_number}}</title>
   <style>
     * {
       margin: 0;
@@ -31,69 +31,75 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 40px;
-    }
-
-    .company-info h1 {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 12px;
-    }
-
-    .company-info p {
-      font-size: 13px;
-      color: #555;
-      line-height: 1.6;
-    }
-
-    .invoice-title {
-      text-align: right;
-    }
-
-    .invoice-title h2 {
-      font-size: 32px;
-      font-weight: bold;
-      color: #888;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-    }
-
-    .invoice-title p {
-      font-size: 13px;
-      color: #555;
-      line-height: 1.6;
-    }
-
-    /* Bill To */
-    .bill-to {
+      padding-bottom: 20px;
+      border-bottom: 3px solid #333;
       margin-bottom: 30px;
     }
 
-    .bill-to h3 {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #888;
-      margin-bottom: 6px;
+    .invoice-header h1 {
+      font-size: 32px;
+      font-weight: bold;
+      color: #333;
+      letter-spacing: 2px;
     }
 
-    .bill-to p {
-      font-size: 14px;
+    .invoice-meta {
+      text-align: right;
+      font-size: 13px;
+      color: #555;
       line-height: 1.6;
+    }
+
+    /* Parties: FROM and BILL TO */
+    .parties {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .party {
+      flex: 1;
+    }
+
+    .party + .party {
+      border-left: 1px solid #ddd;
+      padding-left: 40px;
+    }
+
+    .party h3 {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #888;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .party .name {
+      font-size: 15px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .party p {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.7;
     }
 
     /* Table */
     .invoice-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
     }
 
     .invoice-table thead th {
-      background: #f8f8f8;
-      border: 1px solid #ddd;
-      padding: 10px 14px;
-      font-size: 12px;
+      background: #333;
+      color: #fff;
+      padding: 11px 16px;
+      font-size: 11px;
       font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -105,82 +111,97 @@
     }
 
     .invoice-table tbody td {
-      border: 1px solid #ddd;
-      padding: 10px 14px;
+      padding: 14px 16px;
       font-size: 13px;
       vertical-align: top;
+      border-bottom: 1px solid #eee;
     }
 
     .invoice-table tbody td.right {
       text-align: right;
     }
 
-    .invoice-table tbody tr:nth-child(even) {
-      background: #fafafa;
-    }
-
     /* Totals */
     .totals {
       display: flex;
       justify-content: flex-end;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     .totals-table {
-      width: 280px;
+      width: 320px;
       border-collapse: collapse;
     }
 
     .totals-table td {
-      padding: 8px 14px;
+      padding: 10px 16px;
       font-size: 13px;
-      border: 1px solid #ddd;
     }
 
-    .totals-table td.label {
-      font-weight: bold;
+    .totals-table .subtotal-row td {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .totals-table .subtotal-row .label {
       text-align: right;
-      background: #f8f8f8;
+      color: #555;
     }
 
-    .totals-table td.value {
+    .totals-table .subtotal-row .value {
       text-align: right;
-      width: 100px;
     }
 
-    .totals-table tr.total-due td {
-      font-size: 14px;
+    .totals-table .total-row td {
+      font-size: 15px;
       font-weight: bold;
+      color: #333;
+      border-bottom: 3px solid #333;
+      padding-top: 12px;
+      padding-bottom: 12px;
     }
 
-    /* Payment Terms */
-    .payment-terms {
+    .totals-table .total-row .label {
+      text-align: right;
+    }
+
+    .totals-table .total-row .value {
+      text-align: right;
+    }
+
+    /* Sections: Payment Details, Notes */
+    .section {
       margin-bottom: 30px;
-      padding: 16px 20px;
-      background: #f8f8f8;
-      border-left: 3px solid #ddd;
-      font-size: 13px;
-      line-height: 1.6;
     }
 
-    .payment-terms h3 {
+    .section h3 {
       font-size: 12px;
+      font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: #888;
-      margin-bottom: 6px;
+      color: #333;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
+
+    .section p {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.7;
     }
 
     /* Footer */
     .invoice-footer {
       text-align: center;
-      padding-top: 20px;
-      border-top: 1px solid #eee;
+      padding-top: 30px;
+      border-top: 1px solid #ddd;
+      margin-top: 20px;
     }
 
     .invoice-footer p {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: bold;
+      letter-spacing: 1px;
       color: #555;
     }
 
@@ -228,38 +249,41 @@
 <body>
   <div class="invoice-container">
     <div class="invoice-header">
-      <div class="company-info">
-        <h1>{{company_name}}</h1>
-        <p>
-          {{street_address}}<br>
-          {{city_state_zip}}<br>
-          Phone: {{phone}}{{fax_line}}
-        </p>
-      </div>
-      <div class="invoice-title">
-        <h2>INVOICE</h2>
-        <p>
-          INVOICE # {{invoice_number}}<br>
-          DATE: {{invoice_date}}
-        </p>
+      <h1>{{l_invoice}}</h1>
+      <div class="invoice-meta">
+        {{l_invoice}} # {{invoice_number}}<br>
+        {{l_date}}: {{invoice_date}}
       </div>
     </div>
 
-    <div class="bill-to">
-      <h3>Bill To</h3>
-      <p>
-        {{client_name}}<br>
-        {{client_email}}
-      </p>
+    <div class="parties">
+      <div class="party">
+        <h3>{{l_from}}</h3>
+        <div class="name">{{contractor_name}}</div>
+        <p>
+          {{street_address}}<br>
+          {{city_state_zip}}<br>
+          {{phone}}{{fax_line}}<br>
+          {{email}}
+        </p>
+      </div>
+      <div class="party">
+        <h3>{{l_bill_to}}</h3>
+        <div class="name">{{client_name}}</div>
+        <p>
+          {{client_address}}
+          {{client_email}}
+        </p>
+      </div>
     </div>
 
     <table class="invoice-table">
       <thead>
         <tr>
-          <th style="width: 100px;">Quantity</th>
-          <th>Description</th>
-          <th class="right" style="width: 120px;">Unit Price</th>
-          <th class="right" style="width: 120px;">Total</th>
+          <th style="width: 70px;">{{l_qty}}</th>
+          <th>{{l_description}}</th>
+          <th class="right" style="width: 150px;">{{l_unit_price}}</th>
+          <th class="right" style="width: 150px;">{{l_total}}</th>
         </tr>
       </thead>
       <tbody>
@@ -269,12 +293,12 @@
 
     <div class="totals">
       <table class="totals-table">
-        <tr>
-          <td class="label">SUBTOTAL</td>
+        <tr class="subtotal-row">
+          <td class="label">{{l_subtotal}}</td>
           <td class="value">{{subtotal}}</td>
         </tr>
-        <tr class="total-due">
-          <td class="label">TOTAL DUE</td>
+        <tr class="total-row">
+          <td class="label">{{l_total_due}}</td>
           <td class="value">{{total_due}}</td>
         </tr>
       </table>
@@ -282,13 +306,15 @@
 
     {{payment_terms_section}}
 
+    {{notes_section}}
+
     <div class="invoice-footer">
-      <p>THANK YOU FOR YOUR BUSINESS!</p>
+      <p>{{l_thank_you}}</p>
     </div>
   </div>
 
   <div class="download-btn">
-    <button onclick="window.print()">Download as PDF</button>
+    <button onclick="window.print()">{{l_download}}</button>
   </div>
 </body>
 </html>

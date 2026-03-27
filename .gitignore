@@ -2,6 +2,7 @@
 tmp/
 **DS_Store
 TODO.md
+invoice-generator-workspace
 
 # Installed skill copies (created by npx skills add)
 .agents/
