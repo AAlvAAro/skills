@@ -1,0 +1,53 @@
+{
+  "skill_name": "invoice-generator",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "I need to invoice my client John at john@acme.com. Invoice #101, 40 hours of development at $150/hr. Net 30.",
+      "expected_output": "An HTML invoice file saved to invoices/invoice-101.html with correct client info, line items, totals, and payment terms. A config file should be created.",
+      "files": [],
+      "expectations": [
+        "Invoice HTML file exists at invoices/invoice-101.html",
+        "Config file created at .claude/invoice-generator.local.md",
+        "Invoice contains client name 'John'",
+        "Invoice contains client email 'john@acme.com'",
+        "Invoice shows 40 hours at $150.00",
+        "Invoice total is $6,000.00",
+        "Invoice contains 'Net 30' payment terms",
+        "Invoice has a download/print button"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Create invoice #202 for Sarah Chen (sarah@startup.io). 3 items: 20hrs backend dev at $175, 10hrs code review at $125, 1 deployment setup at $500.",
+      "expected_output": "An HTML invoice with 3 line items, correct per-line math, and a total of $5,250.00. No payment terms section.",
+      "files": [],
+      "expectations": [
+        "Invoice HTML file exists at invoices/invoice-202.html",
+        "Invoice contains 'Sarah Chen'",
+        "Invoice contains 'sarah@startup.io'",
+        "Invoice shows all 3 line items (backend dev, code review, deployment)",
+        "Line totals are correct: $3,500.00, $1,250.00, $500.00",
+        "Invoice total is $5,250.00",
+        "Payment terms section is absent or empty",
+        "Invoice has a download/print button"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Bill TechCorp (billing@techcorp.com) invoice 303 for 8 hours consulting at $200/hr, due on receipt.",
+      "expected_output": "An HTML invoice using config data (Alvaro Dev Studio), correct line item and total, with 'Due on receipt' payment terms.",
+      "files": [],
+      "expectations": [
+        "Invoice HTML file exists at invoices/invoice-303.html",
+        "Invoice uses config company name (Alvaro Dev Studio)",
+        "Invoice contains 'TechCorp'",
+        "Invoice contains 'billing@techcorp.com'",
+        "Invoice shows 8 hours at $200.00",
+        "Invoice total is $1,600.00",
+        "Invoice contains 'Due on receipt' or similar payment terms",
+        "Invoice has a download/print button"
+      ]
+    }
+  ]
+}

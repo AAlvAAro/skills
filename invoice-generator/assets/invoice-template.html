@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice {{invoice_number}}</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #333;
+      background: #f5f5f5;
+      padding: 40px 20px;
+    }
+
+    .invoice-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 50px 60px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    /* Header */
+    .invoice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+
+    .company-info h1 {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .company-info p {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .invoice-title {
+      text-align: right;
+    }
+
+    .invoice-title h2 {
+      font-size: 32px;
+      font-weight: bold;
+      color: #888;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .invoice-title p {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* Bill To */
+    .bill-to {
+      margin-bottom: 30px;
+    }
+
+    .bill-to h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+
+    .bill-to p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Table */
+    .invoice-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    .invoice-table thead th {
+      background: #f8f8f8;
+      border: 1px solid #ddd;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: left;
+    }
+
+    .invoice-table thead th.right {
+      text-align: right;
+    }
+
+    .invoice-table tbody td {
+      border: 1px solid #ddd;
+      padding: 10px 14px;
+      font-size: 13px;
+      vertical-align: top;
+    }
+
+    .invoice-table tbody td.right {
+      text-align: right;
+    }
+
+    .invoice-table tbody tr:nth-child(even) {
+      background: #fafafa;
+    }
+
+    /* Totals */
+    .totals {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 30px;
+    }
+
+    .totals-table {
+      width: 280px;
+      border-collapse: collapse;
+    }
+
+    .totals-table td {
+      padding: 8px 14px;
+      font-size: 13px;
+      border: 1px solid #ddd;
+    }
+
+    .totals-table td.label {
+      font-weight: bold;
+      text-align: right;
+      background: #f8f8f8;
+    }
+
+    .totals-table td.value {
+      text-align: right;
+      width: 100px;
+    }
+
+    .totals-table tr.total-due td {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    /* Payment Terms */
+    .payment-terms {
+      margin-bottom: 30px;
+      padding: 16px 20px;
+      background: #f8f8f8;
+      border-left: 3px solid #ddd;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .payment-terms h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+
+    /* Footer */
+    .invoice-footer {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .invoice-footer p {
+      font-size: 14px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    /* Download button */
+    .download-btn {
+      display: block;
+      max-width: 800px;
+      margin: 20px auto 0;
+      text-align: center;
+    }
+
+    .download-btn button {
+      background: #333;
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .download-btn button:hover {
+      background: #555;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+
+      .invoice-container {
+        box-shadow: none;
+        padding: 20px 40px;
+      }
+
+      .download-btn {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="invoice-container">
+    <div class="invoice-header">
+      <div class="company-info">
+        <h1>{{company_name}}</h1>
+        <p>
+          {{street_address}}<br>
+          {{city_state_zip}}<br>
+          Phone: {{phone}}{{fax_line}}
+        </p>
+      </div>
+      <div class="invoice-title">
+        <h2>INVOICE</h2>
+        <p>
+          INVOICE # {{invoice_number}}<br>
+          DATE: {{invoice_date}}
+        </p>
+      </div>
+    </div>
+
+    <div class="bill-to">
+      <h3>Bill To</h3>
+      <p>
+        {{client_name}}<br>
+        {{client_email}}
+      </p>
+    </div>
+
+    <table class="invoice-table">
+      <thead>
+        <tr>
+          <th style="width: 100px;">Quantity</th>
+          <th>Description</th>
+          <th class="right" style="width: 120px;">Unit Price</th>
+          <th class="right" style="width: 120px;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{line_items}}
+      </tbody>
+    </table>
+
+    <div class="totals">
+      <table class="totals-table">
+        <tr>
+          <td class="label">SUBTOTAL</td>
+          <td class="value">{{subtotal}}</td>
+        </tr>
+        <tr class="total-due">
+          <td class="label">TOTAL DUE</td>
+          <td class="value">{{total_due}}</td>
+        </tr>
+      </table>
+    </div>
+
+    {{payment_terms_section}}
+
+    <div class="invoice-footer">
+      <p>THANK YOU FOR YOUR BUSINESS!</p>
+    </div>
+  </div>
+
+  <div class="download-btn">
+    <button onclick="window.print()">Download as PDF</button>
+  </div>
+</body>
+</html>
