@@ -101,6 +101,21 @@ Professional resume and CV builder that acts as an expert recruiter, not just a 
 npx skills add AAlvAAro/skills@cv-generator
 ```
 
+### brand-kit
+
+Brand identity generator that creates complete brand packages from research to delivery:
+
+- **Research-first** — analyzes industry, competitors, and audience before generating anything
+- **Logo generation** — produces 3-4 logo variants (symbol, wordmark, combination, monogram) via `infsh` CLI or HiggsfieldImageTool
+- **Brand imagery** — hero banners, social avatars, OG images, patterns, and lifestyle shots
+- **Domain availability** — suggests 8-12 domain options and checks each one live
+- **Username availability** — checks handles across Instagram, TikTok, X, YouTube, Facebook, GitHub, and LinkedIn
+- **Flexible delivery** — outputs to Notion, Google Drive folder, or PDF-ready HTML brand guide
+
+```bash
+npx skills add AAlvAAro/skills@brand-kit
+```
+
 ### skill-creator
 
 Skill development assistant that creates new Claude Code skills following Anthropic's official conventions:
@@ -141,6 +156,7 @@ npx skills add AAlvAAro/skills@catador-pro
 /landing-page        →  research + generate a complete landing page from social/web data
 /presentation        →  research + generate an interactive HTML slide deck deployable via URL
 /cv-generator        →  build a professional web resume from any source material
+/brand-kit           →  generate brand identity, logos, images, and check domain + username availability
 /skill-creator       →  create new Claude Code skills with proper structure and conventions
 /catador-pro         →  analyze cupping sessions, score coffees, generate sensory reports
 ```
