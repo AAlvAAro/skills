@@ -101,6 +101,21 @@ Professional resume and CV builder that acts as an expert recruiter, not just a 
 npx skills add AAlvAAro/skills@cv-generator
 ```
 
+### skill-creator
+
+Skill development assistant that creates new Claude Code skills following Anthropic's official conventions:
+
+- **Guided requirements** — walks through domain, triggers, MCP dependencies, and output strategy
+- **Research phase** — scans existing skills for overlap and researches the domain when relevant
+- **Resource planning** — plans SKILL.md + references, examples, assets, and evals as needed
+- **Convention-enforced** — imperative writing style, lean body (1,500-2,000 words), proper frontmatter with trigger phrases
+- **Validation checklist** — verifies structure, style, file references, and naming before completion
+- **Full integration** — updates README and follows all repository patterns automatically
+
+```bash
+npx skills add AAlvAAro/skills@skill-creator
+```
+
 ### catador-pro
 
 AI-powered coffee cupping assistant by [Catador Pro](https://catador.pro). Expert in specialty coffee sensory analysis:
@@ -126,5 +141,6 @@ npx skills add AAlvAAro/skills@catador-pro
 /landing-page        →  research + generate a complete landing page from social/web data
 /presentation        →  research + generate an interactive HTML slide deck deployable via URL
 /cv-generator        →  build a professional web resume from any source material
+/skill-creator       →  create new Claude Code skills with proper structure and conventions
 /catador-pro         →  analyze cupping sessions, score coffees, generate sensory reports
 ```
