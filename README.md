@@ -131,6 +131,20 @@ Skill development assistant that creates new Claude Code skills following Anthro
 npx skills add AAlvAAro/skills@skill-creator
 ```
 
+### rails-ai-kit-init
+
+Initialize a new project from the rails-ai-kit starter kit in one command:
+
+- **Full git setup** — clones the kit, creates a new GitHub repo, remaps `origin` → new project, `upstream` → rails-ai-kit
+- **Dependency installation** — runs `bin/setup` (Ruby gems, Node packages, database migration)
+- **Boot verification** — starts the dev server and confirms it responds
+- **Project customization** — updates app name in config files and package.json
+- **Upstream tracking** — keeps rails-ai-kit as upstream for future `git merge upstream/main`
+
+```bash
+npx skills add AAlvAAro/skills@rails-ai-kit-init
+```
+
 ### catador-pro
 
 AI-powered coffee cupping assistant by [Catador Pro](https://catador.pro). Expert in specialty coffee sensory analysis:
@@ -158,5 +172,6 @@ npx skills add AAlvAAro/skills@catador-pro
 /cv-generator        →  build a professional web resume from any source material
 /brand-kit           →  generate brand identity, logos, images, and check domain + username availability
 /skill-creator       →  create new Claude Code skills with proper structure and conventions
+/rails-ai-kit-init  →  bootstrap a new project from the rails-ai-kit starter kit
 /catador-pro         →  analyze cupping sessions, score coffees, generate sensory reports
 ```
